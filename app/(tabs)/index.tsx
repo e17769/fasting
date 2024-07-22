@@ -50,29 +50,29 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
-       <View style={styles.container}>
-      <Text style={styles.header}>Time Addition App</Text>
-      <View style={styles.inputContainer}>
+       <View style={[styles.container, styles.shadowProp]}>
+      <Text style={[styles.header, styles.shadowProp]}>When are you starting your fast?</Text>
+      <View style={[styles.inputContainer, styles.shadowProp]}>
         <TextInput
-          style={styles.input}
-          placeholder="Enter hours"
+          style={[styles.inputHours, styles.shadowProp]}
+          placeholder="00"
           keyboardType="numeric"
           value={hours}
           onChangeText={text => setHours(text)}
         />
-        <Text style={styles.colon}>:</Text>
+        <Text style={[styles.colon, styles.shadowProp]}>:</Text>
         <TextInput
-          style={styles.input}
-          placeholder="Enter minutes"
+          style={[styles.inputMM, styles.shadowProp]}
+          placeholder="00"
           keyboardType="numeric"
           value={minutes}
           onChangeText={text => setMinutes(text)}
         />
       </View>
-      <Button title="Add 16 Hours" onPress={handleAddTime} />
-      <View style={styles.resultContainer}>
-        <Text style={styles.resultText}>Result:</Text>
-        <Text style={styles.result}>{resultHours}:{resultMinutes}</Text>
+      <Button  title="Add 16 Hours" onPress={handleAddTime} />
+      <View style={[styles.resultContainer, styles.shadowProp]}>
+        <Text style={[styles.resultText, styles.shadowProp]}>Result</Text>
+        <Text style={[styles.result, styles.shadowProp]}>{resultHours}:{resultMinutes}</Text>
       </View>
     </View>
     </ParallaxScrollView>
@@ -85,25 +85,48 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#7c9177',
+    shadowOpacity: 0.5,
+    shadowColor: '#fff',
+    textShadowRadius:2,
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    color: '#485745',
+     opacity: 0.5
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
   },
-  input: {
+  inputHours: {
+    fontWeight: 'bold',
     width: 80,
     height: 40,
-    borderColor: 'gray',
+    opacity: 0.5,
+    borderColor: '#748071',
     borderWidth: 1,
     paddingHorizontal: 10,
     textAlign: 'center',
+    fontSize: 18,
+    color:'#b6c4b3'
+  },
+  inputMM: {
+     fontWeight: 'bold',
+    width: 80,
+    height: 40,
+    opacity: 0.5,
+    borderColor: '#748071',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+     textAlign: 'center',
+    fontSize: 18,
+    color:'#b6c4b3'
   },
   colon: {
     fontSize: 24,
@@ -112,29 +135,32 @@ const styles = StyleSheet.create({
   resultContainer: {
     marginTop: 20,
     alignItems: 'center',
+    color:'#9c2796'
   },
   resultText: {
     fontSize: 18,
+    color: '#485745',
+    fontWeight: 'bold',
+     opacity: 0.5
   },
   result: {
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 10,
+    color: '#b6c4b3',
+     opacity: 0.5
   },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
+  reactLogo: {},
+  Shit: {
     height: 178,
     width: 290,
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  shadowProp: {
+    textShadowColor: '#6e7d6a',
+    shadowOpacity: 0.5, 
+    textShadowRadius: 3,
   },
 });
