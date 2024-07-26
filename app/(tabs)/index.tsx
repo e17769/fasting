@@ -1,20 +1,26 @@
-import { Image, StyleSheet, Platform,View, Text, TextInput, Button } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Platform,
+  View,
+  Text,
+  TextInput,
+  Button,
+} from "react-native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import React, { useState } from 'react';
+import { HelloWave } from "@/components/HelloWave";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import React, { useState } from "react";
 //import { Icon } from 'react-native-elements';
 
-
 export default function HomeScreen() {
-
-
-  const [hours, setHours] = useState('');
-  const [minutes, setMinutes] = useState('');
-  const [resultHours, setResultHours] = useState('');
-  const [resultMinutes, setResultMinutes] = useState('');
+  const [hours, setHours] = useState("");
+  const [minutes, setMinutes] = useState("");
+  const [resultHours, setResultHours] = useState("");
+  const [resultMinutes, setResultMinutes] = useState("");
+ 
 
   const handleAddTime = () => {
     // Convert input to integers
@@ -35,98 +41,151 @@ export default function HomeScreen() {
     if (totalHours >= 24) {
       totalHours = totalHours % 24;
     }
+    // houres convertion
+    //const [hours24, minutes] = totalHours.split(':').map(Number);
+
+    // Determine AM or PM suffix
+    let finalHour = formatHours(totalHours);
 
     // Update state with the result
-    setResultHours(totalHours.toString());
+    setResultHours(finalHour);
     setResultMinutes(totalMinutes.toString());
+   
+
+    //Helper functions
+    function formatHours(hours: number) {
+      const period = hours >= 12 ? "PM" : "AM";
+      // Convert hours from 24-hour to 12-hour format
+      const hours12 = hours % 12 || 12;
+      // Format the hours and minutes into a 12-hour time string
+      return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
+    }
   };
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerBackgroundColor={{ light: "#7c9177", dark: "#1D3D47" }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
+          source={require("@/assets/images/partial-react-logo.png")}
           style={styles.reactLogo}
         />
-      }>
-       <View style={[styles.container, styles.shadowProp]}>
-      <Text style={[styles.header, styles.shadowProp]}>When are you starting your fast?</Text>
-      <View style={[styles.inputContainer, styles.shadowProp]}>
-        <TextInput
-          style={[styles.inputHours, styles.shadowProp]}
-          placeholder="00"
-          keyboardType="numeric"
-          value={hours}
-          onChangeText={text => setHours(text)}
-        />
-        <Text style={[styles.colon, styles.shadowProp]}>:</Text>
-        <TextInput
-          style={[styles.inputMM, styles.shadowProp]}
-          placeholder="00"
-          keyboardType="numeric"
-          value={minutes}
-          onChangeText={text => setMinutes(text)}
-        />
+      }
+    >
+      <View style={[styles.container, styles.shadowProp]}>
+        <Text style={[styles.header, styles.shadowProp]}>
+         Fast Starting Time
+        </Text>
+        <View style={[styles.inputContainer, styles.shadowProp]}>
+          <TextInput
+            style={[styles.inputHours, styles.shadowProp]}
+            placeholder="00"
+            keyboardType="numeric"
+            value={hours}
+            onChangeText={(text) => setHours(text)}
+          />
+          <Text style={[styles.colon, styles.shadowProp]}>:</Text>
+          <TextInput
+            style={[styles.inputMM, styles.shadowProp]}
+            placeholder="00"
+            keyboardType="numeric"
+            value={minutes}
+            onChangeText={(text) => setMinutes(text)}
+          />
+        </View>
+        <Button title="Add 16 Hours" onPress={handleAddTime} />
+        <View style={[styles.resultContainer, styles.shadowProp]}>
+          <Text style={[styles.resultDetailText]}>Start Time</Text>
+          <Text style={[styles.result, styles.shadowProp]}>
+            {resultHours}
+          </Text>
+
+          <Text style={[styles.resultDetailText]}>Blood Sugar Rises</Text>
+          <Text style={[styles.result, styles.shadowProp]}>
+            {resultHours}
+          </Text>
+
+          <Text style={[styles.resultDetailText]}>Blood Sugar goes down</Text>
+          <Text style={[styles.result, styles.shadowProp]}>
+            {resultHours}
+          </Text>
+
+          <Text style={[styles.resultDetailText]}>
+            Blood Sugar goes to normal
+          </Text>
+          <Text style={[styles.result, styles.shadowProp]}>
+            {resultHours}
+          </Text>
+
+          <Text style={[styles.resultDetailText]}>Fat Burn (yeahhh!)</Text>
+          <Text style={[styles.result, styles.shadowProp]}>
+            {resultHours}
+          </Text>
+
+          <Text style={[styles.resultDetailText]}>Ketosis</Text>
+          <Text style={[styles.result, styles.shadowProp]}>
+            {resultHours}
+          </Text>
+
+          <Text style={[styles.resultDetailText]}>Autophagy</Text>
+          <Text style={[styles.result, styles.shadowProp]}>
+            {resultHours}
+          </Text>
+
+          <Text style={[styles.resultDetailText]}>Finish line!</Text>
+          <Text style={[styles.result, styles.shadowProp]}>
+            {resultHours}
+          </Text>
+        </View>
       </View>
-      <Button  title="Add 16 Hours" onPress={handleAddTime} />
-      <View style={[styles.resultContainer, styles.shadowProp]}>
-        <Text style={[styles.resultText, styles.shadowProp]}>Result</Text>
-        <Text style={[styles.result, styles.shadowProp]}>{resultHours}:{resultMinutes}</Text>
-      </View>
-    </View>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-   container: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 20,
-    backgroundColor: '#7c9177',
-    shadowOpacity: 0.5,
-    shadowColor: '#fff',
-    textShadowRadius:2,
+    backgroundColor: "#000000",
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 32,
+    fontWeight: "bold",
     marginBottom: 20,
-    fontStyle: 'italic',
-    textAlign: 'center',
-    color: '#485745',
-     opacity: 0.5
+    textAlign: "center",
+    color: "#a1f9ff",
+    opacity: 0.88,
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 20,
   },
   inputHours: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     width: 80,
     height: 40,
-    opacity: 0.5,
-    borderColor: '#748071',
+    opacity: 0.88,
+    borderColor: "#748071",
     borderWidth: 1,
     paddingHorizontal: 10,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 18,
-    color:'#b6c4b3'
+    color: "#a1f9ff",
   },
   inputMM: {
-     fontWeight: 'bold',
+    fontWeight: "bold",
     width: 80,
     height: 40,
-    opacity: 0.5,
-    borderColor: '#748071',
+    opacity: 0.88,
+    borderColor: "#748071",
     borderWidth: 1,
     paddingHorizontal: 10,
-     textAlign: 'center',
+    textAlign: "center",
     fontSize: 18,
-    color:'#b6c4b3'
+    color: "#a1f9ff",
   },
   colon: {
     fontSize: 24,
@@ -134,21 +193,26 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     marginTop: 20,
-    alignItems: 'center',
-    color:'#9c2796'
+    alignItems: "center",
+    color: "#a1f9ff",
   },
   resultText: {
     fontSize: 18,
-    color: '#485745',
-    fontWeight: 'bold',
-     opacity: 0.5
+    color: "#a1f9ff",
+    fontWeight: "bold",
+    opacity: 0.88,
+  },
+  resultDetailText: {
+    fontSize: 18,
+    color: "#a1f9ff",
+    fontWeight: "bold",
   },
   result: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 10,
-    color: '#b6c4b3',
-     opacity: 0.5
+    color: "#b6c4b3",
+    opacity: 0.88,
   },
   reactLogo: {},
   Shit: {
@@ -156,11 +220,11 @@ const styles = StyleSheet.create({
     width: 290,
     bottom: 0,
     left: 0,
-    position: 'absolute',
+    position: "absolute",
   },
   shadowProp: {
-    textShadowColor: '#6e7d6a',
-    shadowOpacity: 0.5, 
-    textShadowRadius: 3,
+    textShadowColor: "#6e7d6a",
+    shadowOpacity: 0.1,
+    textShadowRadius: 1,
   },
 });
