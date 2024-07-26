@@ -19,6 +19,8 @@ export default function HomeScreen() {
   const [minutes, setMinutes] = useState("");
   const [resultHours, setResultHours] = useState("");
   const [resultMinutes, setResultMinutes] = useState("");
+
+   const [resultStartTime, setStartTime] = useState("");
  
 
   const handleAddTime = () => {
@@ -49,6 +51,7 @@ export default function HomeScreen() {
     // Update state with the result
     setResultHours(finalHour);
     setResultMinutes(totalMinutes.toString());
+    setStartTime(formatHoursToAMnPM(inputHours));
    
 
     //Helper functions
@@ -96,7 +99,7 @@ export default function HomeScreen() {
         <View style={[styles.resultContainer, styles.shadowProp]}>
           <Text style={[styles.resultDetailText]}>Start Time</Text>
           <Text style={[styles.result, styles.shadowProp]}>
-            {resultHours}
+            {resultStartTime}
           </Text>
 
           <Text style={[styles.resultDetailText]}>Blood Sugar Rises</Text>
