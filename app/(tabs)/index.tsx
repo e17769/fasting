@@ -8,7 +8,6 @@ import {
   Button,
 } from "react-native";
 
-import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -45,7 +44,7 @@ export default function HomeScreen() {
     //const [hours24, minutes] = totalHours.split(':').map(Number);
 
     // Determine AM or PM suffix
-    let finalHour = formatHours(totalHours);
+    let finalHour = formatHoursToAMnPM(totalHours);
 
     // Update state with the result
     setResultHours(finalHour);
@@ -53,7 +52,7 @@ export default function HomeScreen() {
    
 
     //Helper functions
-    function formatHours(hours: number) {
+    function formatHoursToAMnPM(hours: number) {
       const period = hours >= 12 ? "PM" : "AM";
       // Convert hours from 24-hour to 12-hour format
       const hours12 = hours % 12 || 12;
