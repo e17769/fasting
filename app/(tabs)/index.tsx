@@ -1,18 +1,15 @@
 import {
   Image,
   StyleSheet,
-  Platform,
   View,
   Text,
   TextInput,
-  Button,
+  Button
 } from "react-native";
-
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import React, { useState } from "react";
 //import { Icon } from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
   const [hours, setHours] = useState("");
@@ -31,6 +28,8 @@ export default function HomeScreen() {
     let inputHours = parseInt(hours) || 0;
     let inputMinutes = parseInt(minutes) || 0;
 
+    storeHoursFromStorage("inputHours",inputHours);
+
     // Add  hours and calculate new time
     let bloodDownPeriod = inputHours + 2;
     let bloodNormalPeriod = inputHours + 8;
@@ -38,9 +37,6 @@ export default function HomeScreen() {
     let ketosisPeriod = inputHours + 14;
     let totalHours = inputHours + 16;
     let totalMinutes = inputMinutes;
-
-    
-    
 
     // Adjust minutes if it exceeds 59
     if (totalMinutes >= 60) {
@@ -66,16 +62,38 @@ export default function HomeScreen() {
     setbloodNormalPeriod(formatHoursToAMnPM(bloodNormalPeriod));
     setfatBurningPeriod(formatHoursToAMnPM(fatBurningPeriod));
     setketosisPeriod(formatHoursToAMnPM(ketosisPeriod));
-
-    //Helper functions
-    function formatHoursToAMnPM(hours: number) {
-      const period = hours >= 12 ? "PM" : "AM";
-      // Convert hours from 24-hour to 12-hour format
-      const hours12 = hours % 12 || 12;
-      // Format the hours and minutes into a 12-hour time string
-      return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
-    }
   };
+  //Helper functions outside the main function
+  //Helper functions
+  function formatHoursToAMnPM(hours: number) {
+    const period = hours >= 12 ? "PM" : "AM";
+    // Convert hours from 24-hour to 12-hour format
+    const hours12 = hours % 12 || 12;
+    // Format the hours and minutes into a 12-hour time string
+    return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
+  }
+ const retrieveHoursFromStorageData = async (key: string) => {
+  try {
+    const serializedValue = await AsyncStorage.getItem(key);
+    if (serializedValue !== null) {
+      return JSON.parse(serializedValue);
+    }
+  } catch (error) {
+    // Handle the error
+    console.error('Failed to retrieve data from AsyncStorage:', error);
+  }
+  return null; // or some default value
+};
+
+ const storeHoursFromStorage = async (key: string, value: any) => {
+  try {
+    const serializedValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, serializedValue);
+  } catch (error) {
+    // Handle the error
+    console.error('Failed to save data to AsyncStorage:', error);
+  }
+};
 
   return (
     <ParallaxScrollView
@@ -111,28 +129,54 @@ export default function HomeScreen() {
         <Button title="Add 16 Hours" onPress={handleAddTime} />
         <View style={[styles.resultContainer, styles.shadowProp]}>
           <Text style={[styles.resultDetailText]}>Start:Blood Sugar Rises</Text>
-          <Text style={[styles.result, styles.shadowProp, styles.bloodSugerUpPeriod]}>{resultStartTime}</Text>
+          <Text
+            style={[
+              styles.result,
+              styles.shadowProp,
+              styles.bloodSugerUpPeriod,
+            ]}
+          >
+            {resultStartTime}
+          </Text>
 
           <Text style={[styles.resultDetailText]}>
             (2h):Blood Sugar goes down
           </Text>
-          <Text style={[styles.result, styles.shadowProp, styles.bloodDownPeriod]}>{resultbloodDownPeriod}</Text>
+          <Text
+            style={[styles.result, styles.shadowProp, styles.bloodDownPeriod]}
+          >
+            {resultbloodDownPeriod}
+          </Text>
 
           <Text style={[styles.resultDetailText]}>
             (8h):Blood Sugar goes to normal
           </Text>
-          <Text style={[styles.result, styles.shadowProp, styles.bloodNormalPeriod]}>{resultbloodNormalPeriod}</Text>
+          <Text
+            style={[styles.result, styles.shadowProp, styles.bloodNormalPeriod]}
+          >
+            {resultbloodNormalPeriod}
+          </Text>
 
           <Text style={[styles.resultDetailText]}>
             (10h):Fat Burn (yeahhh!)
           </Text>
-          <Text style={[styles.result, styles.shadowProp, styles.fatBurningPeriod]}>{resultfatBurningPeriod}</Text>
+          <Text
+            style={[styles.result, styles.shadowProp, styles.fatBurningPeriod]}
+          >
+            {resultfatBurningPeriod}
+          </Text>
 
           <Text style={[styles.resultDetailText]}>(14-16h):Ketosis</Text>
-          <Text style={[styles.result, styles.shadowProp, styles.ketosisPeriod]}>{resultketosisPeriod}</Text>
+          <Text
+            style={[styles.result, styles.shadowProp, styles.ketosisPeriod]}
+          >
+            {resultketosisPeriod}
+          </Text>
 
           <Text style={[styles.resultDetailText]}>(16h):Autophagy</Text>
-          <Text style={[styles.result, styles.shadowProp, styles.autophagy]}>{resultHours}</Text>
+          <Text style={[styles.result, styles.shadowProp, styles.autophagy]}>
+            {resultHours}
+          </Text>
         </View>
       </View>
     </ParallaxScrollView>
@@ -140,12 +184,12 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  bloodSugerUpPeriod: { color: "#fc0a0a"},
-  bloodDownPeriod:  { color:"#ada824"},
-  bloodNormalPeriod:  { color:  "#f8fc0a"},
-  fatBurningPeriod:  { color: "#fa6502"},
+  bloodSugerUpPeriod: { color: "#fc0a0a" },
+  bloodDownPeriod: { color: "#ada824" },
+  bloodNormalPeriod: { color: "#f8fc0a" },
+  fatBurningPeriod: { color: "#fa6502" },
   ketosisPeriod: { color: "#62ad24" },
-   autophagy:  { color: "#2499ad"},
+  autophagy: { color: "#2499ad" },
   container: {
     flex: 1,
     justifyContent: "center",
