@@ -20,17 +20,27 @@ export default function HomeScreen() {
   const [resultHours, setResultHours] = useState("");
   const [resultMinutes, setResultMinutes] = useState("");
 
-   const [resultStartTime, setStartTime] = useState("");
- 
+  const [resultStartTime, setStartTime] = useState("");
+  const [resultbloodDownPeriod, setbloodDownPeriod] = useState("");
+  const [resultbloodNormalPeriod, setbloodNormalPeriod] = useState("");
+  const [resultfatBurningPeriod, setfatBurningPeriod] = useState("");
+  const [resultketosisPeriod, setketosisPeriod] = useState("");
 
   const handleAddTime = () => {
     // Convert input to integers
     let inputHours = parseInt(hours) || 0;
     let inputMinutes = parseInt(minutes) || 0;
 
-    // Add 16 hours and calculate new time
+    // Add  hours and calculate new time
+    let bloodDownPeriod = inputHours + 2;
+    let bloodNormalPeriod = inputHours + 8;
+    let fatBurningPeriod = inputHours + 10;
+    let ketosisPeriod = inputHours + 14;
     let totalHours = inputHours + 16;
     let totalMinutes = inputMinutes;
+
+    
+    
 
     // Adjust minutes if it exceeds 59
     if (totalMinutes >= 60) {
@@ -52,7 +62,10 @@ export default function HomeScreen() {
     setResultHours(finalHour);
     setResultMinutes(totalMinutes.toString());
     setStartTime(formatHoursToAMnPM(inputHours));
-   
+    setbloodDownPeriod(formatHoursToAMnPM(bloodDownPeriod));
+    setbloodNormalPeriod(formatHoursToAMnPM(bloodNormalPeriod));
+    setfatBurningPeriod(formatHoursToAMnPM(fatBurningPeriod));
+    setketosisPeriod(formatHoursToAMnPM(ketosisPeriod));
 
     //Helper functions
     function formatHoursToAMnPM(hours: number) {
@@ -76,7 +89,7 @@ export default function HomeScreen() {
     >
       <View style={[styles.container, styles.shadowProp]}>
         <Text style={[styles.header, styles.shadowProp]}>
-         Fast Starting Time
+          Fast Starting Time
         </Text>
         <View style={[styles.inputContainer, styles.shadowProp]}>
           <TextInput
@@ -97,47 +110,29 @@ export default function HomeScreen() {
         </View>
         <Button title="Add 16 Hours" onPress={handleAddTime} />
         <View style={[styles.resultContainer, styles.shadowProp]}>
-          <Text style={[styles.resultDetailText]}>Start Time</Text>
-          <Text style={[styles.result, styles.shadowProp]}>
-            {resultStartTime}
-          </Text>
-
-          <Text style={[styles.resultDetailText]}>Blood Sugar Rises</Text>
-          <Text style={[styles.result, styles.shadowProp]}>
-            {resultHours}
-          </Text>
-
-          <Text style={[styles.resultDetailText]}>Blood Sugar goes down</Text>
-          <Text style={[styles.result, styles.shadowProp]}>
-            {resultHours}
-          </Text>
+          <Text style={[styles.resultDetailText]}>Start:Blood Sugar Rises</Text>
+          <Text style={[styles.result, styles.shadowProp, styles.bloodSugerUpPeriod]}>{resultStartTime}</Text>
 
           <Text style={[styles.resultDetailText]}>
-            Blood Sugar goes to normal
+            (2h):Blood Sugar goes down
           </Text>
-          <Text style={[styles.result, styles.shadowProp]}>
-            {resultHours}
-          </Text>
+          <Text style={[styles.result, styles.shadowProp, styles.bloodDownPeriod]}>{resultbloodDownPeriod}</Text>
 
-          <Text style={[styles.resultDetailText]}>Fat Burn (yeahhh!)</Text>
-          <Text style={[styles.result, styles.shadowProp]}>
-            {resultHours}
+          <Text style={[styles.resultDetailText]}>
+            (8h):Blood Sugar goes to normal
           </Text>
+          <Text style={[styles.result, styles.shadowProp, styles.bloodNormalPeriod]}>{resultbloodNormalPeriod}</Text>
 
-          <Text style={[styles.resultDetailText]}>Ketosis</Text>
-          <Text style={[styles.result, styles.shadowProp]}>
-            {resultHours}
+          <Text style={[styles.resultDetailText]}>
+            (10h):Fat Burn (yeahhh!)
           </Text>
+          <Text style={[styles.result, styles.shadowProp, styles.fatBurningPeriod]}>{resultfatBurningPeriod}</Text>
 
-          <Text style={[styles.resultDetailText]}>Autophagy</Text>
-          <Text style={[styles.result, styles.shadowProp]}>
-            {resultHours}
-          </Text>
+          <Text style={[styles.resultDetailText]}>(14-16h):Ketosis</Text>
+          <Text style={[styles.result, styles.shadowProp, styles.ketosisPeriod]}>{resultketosisPeriod}</Text>
 
-          <Text style={[styles.resultDetailText]}>Finish line!</Text>
-          <Text style={[styles.result, styles.shadowProp]}>
-            {resultHours}
-          </Text>
+          <Text style={[styles.resultDetailText]}>(16h):Autophagy</Text>
+          <Text style={[styles.result, styles.shadowProp, styles.autophagy]}>{resultHours}</Text>
         </View>
       </View>
     </ParallaxScrollView>
@@ -145,6 +140,12 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  bloodSugerUpPeriod: { color: "#fc0a0a"},
+  bloodDownPeriod:  { color:"#ada824"},
+  bloodNormalPeriod:  { color:  "#f8fc0a"},
+  fatBurningPeriod:  { color: "#fa6502"},
+  ketosisPeriod: { color: "#62ad24" },
+   autophagy:  { color: "#2499ad"},
   container: {
     flex: 1,
     justifyContent: "center",
@@ -213,7 +214,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginTop: 10,
-    color: "#b6c4b3",
     opacity: 0.88,
   },
   reactLogo: {},
