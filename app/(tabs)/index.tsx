@@ -28,7 +28,8 @@ export default function HomeScreen() {
     let inputHours = parseInt(hours) || 0;
     let inputMinutes = parseInt(minutes) || 0;
 
-    storeHoursFromStorage("inputHours",inputHours);
+    storeData("inputHours", inputHours);
+    storeData("inputMinutes",inputMinutes);
 
     // Add  hours and calculate new time
     let bloodDownPeriod = inputHours + 2;
@@ -48,8 +49,7 @@ export default function HomeScreen() {
     if (totalHours >= 24) {
       totalHours = totalHours % 24;
     }
-    // houres convertion
-    //const [hours24, minutes] = totalHours.split(':').map(Number);
+
 
     // Determine AM or PM suffix
     let finalHour = formatHoursToAMnPM(totalHours);
@@ -72,7 +72,7 @@ export default function HomeScreen() {
     // Format the hours and minutes into a 12-hour time string
     return `${hours12}:${minutes.toString().padStart(2, "0")} ${period}`;
   }
- const retrieveHoursFromStorageData = async (key: string) => {
+ const retrieveDataFromStorage = async (key: string) => {
   try {
     const serializedValue = await AsyncStorage.getItem(key);
     if (serializedValue !== null) {
@@ -85,7 +85,7 @@ export default function HomeScreen() {
   return null; // or some default value
 };
 
- const storeHoursFromStorage = async (key: string, value: any) => {
+ const storeData = async (key: string, value: any) => {
   try {
     const serializedValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, serializedValue);
