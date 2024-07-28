@@ -62,5 +62,7 @@ There are more futtures comming in the future
 ## About the author
 
 Ahmed Gadir
-Follow me at [@e17769/] (https://github.com/e17769/ )
-link: [Ahmed Gadir](https://www.linkedin.com/in/ahmedgadir/)
+Follow me at:
+[Github] (https://github.com/e17769/ )
+[Linkedin](https://www.linkedin.com/in/ahmedgadir/)
+[Personal Page](https://ahmedgadir.com/)
