@@ -1,6 +1,7 @@
 # Mobile fasting app 🍱 🥗 🍩 🍮
 
 ![React Native](assets/images/header_logo.svg)
+![React Native](assets/images/react-logo.png)
 
 ## 16-Hour Fast (16/8 Intermittent Fasting)
 
