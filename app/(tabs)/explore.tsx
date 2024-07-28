@@ -1,88 +1,98 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import { AntDesign } from "@expo/vector-icons";
+import { StyleSheet, Image, Platform } from "react-native";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Collapsible } from "@/components/Collapsible";
+import { ExternalLink } from "@/components/ExternalLink";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
 
 export default function TabTwoScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
+      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+      headerImage={
+        <Image source={require("@/assets/images/partial-react-logo.png")} />
+      }
+    >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
+        <ThemedText type="title">Benefits of Fasting</ThemedText>
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
+      <ThemedText>
+        Fasting is a practice that can offer numerous health benefits when done
+        correctly. Here, we'll explore some of these benefits.
+      </ThemedText>
+      <Collapsible title="Improved Metabolic Health">
         <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
+          Fasting can improve various aspects of metabolic health. It helps in
+          reducing insulin resistance, which lowers the risk of type 2 diabetes.
+          Fasting periods allow the body to use up excess glucose, leading to
+          improved blood sugar control.
         </ThemedText>
         <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
+          Additionally, fasting may help in lowering blood pressure and
+          cholesterol levels, contributing to overall cardiovascular health.
         </ThemedText>
       </Collapsible>
-      <Collapsible title="Images">
+      <Collapsible title="Enhanced Brain Function">
         <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
+          Studies suggest that fasting may enhance brain function by promoting
+          the production of brain-derived neurotrophic factor (BDNF), which
+          supports cognitive function and mental clarity.
         </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
+        <ThemedText>
+          Fasting can also encourage autophagy, a process where the brain clears
+          out damaged cells, which is believed to protect against
+          neurodegenerative diseases.
+        </ThemedText>
       </Collapsible>
-      <Collapsible title="Custom fonts">
+      <Collapsible title="Weight Management">
         <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
+          One of the most popular reasons for fasting is weight management. By
+          reducing the eating window, many people naturally consume fewer
+          calories, which can lead to weight loss.
         </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
+        <ThemedText>
+          Fasting can also increase metabolic rate temporarily, enhancing fat
+          burning and contributing to weight loss goals.
+        </ThemedText>
       </Collapsible>
-      <Collapsible title="Light and dark mode components">
+      <Collapsible title="Improved Longevity">
         <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
+          Fasting may contribute to increased longevity by enhancing cellular
+          repair processes and reducing inflammation. The practice of
+          intermittent fasting has been associated with longer lifespan in
+          several animal studies.
         </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
+        <ThemedText>
+          While human studies are still ongoing, the potential for fasting to
+          extend lifespan remains a compelling area of research.
+        </ThemedText>
       </Collapsible>
-      <Collapsible title="Animations">
+      <Collapsible title="Detoxification and Cellular Repair">
         <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
+          Fasting activates the body's detoxification processes. During fasting
+          periods, the body works more efficiently to remove toxins and repair
+          damaged cells.
         </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
+        <ThemedText>
+          Autophagy, the body's way of cleaning out damaged cells and
+          regenerating new ones, is particularly enhanced during fasting,
+          contributing to overall health.
+        </ThemedText>
+      </Collapsible>
+      <Collapsible title="Tips for Effective Fasting">
+        <ThemedText>
+          To maximize the benefits of fasting, it is important to stay hydrated
+          and consume nutrient-dense foods during eating periods. Avoiding
+          excessive caloric intake and choosing balanced meals can help sustain
+          the benefits of fasting.
+        </ThemedText>
+        <ThemedText>
+          Always consult with a healthcare provider before starting a fasting
+          regimen, especially if you have underlying health conditions or are on
+          medication.
+        </ThemedText>
       </Collapsible>
     </ParallaxScrollView>
   );
@@ -90,13 +100,13 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   headerImage: {
-    color: '#808080',
+    color: "#808080",
     bottom: -90,
     left: -35,
-    position: 'absolute',
+    position: "absolute",
   },
   titleContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 8,
   },
 });
