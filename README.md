@@ -70,3 +70,5 @@ Follow me at:
 - [Github](https://github.com/e17769/)
 - [Linkedin](https://www.linkedin.com/in/ahmedgadir/)
 - [Personal Page](https://ahmedgadir.com/)
+- [YouTube Channel](https://www.youtube.com/watch?v=73RWR944tgE)
+- [Podcast](https://www.youtube.com/@atlantadevtalk1198/featured)
