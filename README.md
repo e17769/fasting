@@ -1,8 +1,51 @@
-# Welcome to your Expo app 👋
+# Welcome the Mobile fasting app 🍱 🥗 🍩 🍮
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 16-Hour Fast (16/8 Intermittent Fasting)
 
-## Get started
+The 16-hour fast, commonly known as the 16/8 intermittent fasting method, involves fasting for 16 hours each day and restricting eating to an 8-hour window. This approach is popular for its simplicity and potential health benefits.
+
+### Overview
+
+- **Fasting Duration:** 16 hours
+- **Eating Window:** 8 hours
+
+### Stages
+
+1. **Pre-Fast (Preparation):**
+
+   - **Description:** Complete your last meal before the fasting period starts. A balanced meal with proteins, healthy fats, and fiber helps sustain you through the fast.
+
+2. **Fasting Phase:**
+
+   - **Description:** No caloric intake during the 16-hour fasting window. Hydration is key—drink water, herbal teas, or black coffee. The body shifts to using fat stores for energy.
+
+3. **Eating Window:**
+
+   - **Description:** Consume all meals and snacks within the 8-hour period. Focus on nutrient-dense foods to meet daily caloric and nutritional needs.
+
+4. **Post-Eating Phase:**
+   - **Description:** After the eating window closes, prepare for the next fasting period. Ensure you've eaten adequately during the 8-hour window.
+
+### Benefits
+
+- **Weight Management:** Aids in weight loss and maintenance.
+- **Metabolic Health:** May enhance insulin sensitivity and support metabolic health.
+- **Autophagy:** Promotes cellular repair processes through fasting.
+
+### Considerations
+
+- **Stay Hydrated:** Drink plenty of water during the fasting period.
+- **Balanced Diet:** Focus on wholesome, nutrient-rich foods during the eating window.
+- **Individual Needs:** Adapt based on personal health and lifestyle.
+
+The 16-hour fast is a practical and effective time-restricted eating pattern that can integrate well into daily routines while supporting various health objectives.
+
+The app will store your fasting information in the local storage so you don't lose it when you close the app
+![Alt Fasting app](assets/images/Fasting-model.png)
+
+There are more futtures comming in the future
+
+## Hot to build this app
 
 1. Install dependencies
 
@@ -16,35 +59,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## About the author
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Ahmed Gadir
+Follow me at [@e17769/] (https://github.com/e17769/ )
+link: [Ahmed Gadir](https://www.linkedin.com/in/ahmedgadir/)
