@@ -7,63 +7,20 @@ import {
   Button
 } from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //import { Icon } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function HomeScreen() {
+export default  function HomeScreen() {
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [resultHours, setResultHours] = useState("");
   const [resultMinutes, setResultMinutes] = useState("");
-
   const [resultStartTime, setStartTime] = useState("");
   const [resultbloodDownPeriod, setbloodDownPeriod] = useState("");
   const [resultbloodNormalPeriod, setbloodNormalPeriod] = useState("");
   const [resultfatBurningPeriod, setfatBurningPeriod] = useState("");
   const [resultketosisPeriod, setketosisPeriod] = useState("");
-
-  const handleAddTime = () => {
-    // Convert input to integers
-    let inputHours = parseInt(hours) || 0;
-    let inputMinutes = parseInt(minutes) || 0;
-
-    storeData("inputHours", inputHours);
-    storeData("inputMinutes",inputMinutes);
-
-    // Add  hours and calculate new time
-    let bloodDownPeriod = inputHours + 2;
-    let bloodNormalPeriod = inputHours + 8;
-    let fatBurningPeriod = inputHours + 10;
-    let ketosisPeriod = inputHours + 14;
-    let totalHours = inputHours + 16;
-    let totalMinutes = inputMinutes;
-
-    // Adjust minutes if it exceeds 59
-    if (totalMinutes >= 60) {
-      totalHours += Math.floor(totalMinutes / 60);
-      totalMinutes = totalMinutes % 60;
-    }
-
-    // Adjust hours if it exceeds 23
-    if (totalHours >= 24) {
-      totalHours = totalHours % 24;
-    }
-
-
-    // Determine AM or PM suffix
-    let finalHour = formatHoursToAMnPM(totalHours);
-
-    // Update state with the result
-    setResultHours(finalHour);
-    setResultMinutes(totalMinutes.toString());
-    setStartTime(formatHoursToAMnPM(inputHours));
-    setbloodDownPeriod(formatHoursToAMnPM(bloodDownPeriod));
-    setbloodNormalPeriod(formatHoursToAMnPM(bloodNormalPeriod));
-    setfatBurningPeriod(formatHoursToAMnPM(fatBurningPeriod));
-    setketosisPeriod(formatHoursToAMnPM(ketosisPeriod));
-  };
-  //Helper functions outside the main function
   //Helper functions
   function formatHoursToAMnPM(hours: number) {
     const period = hours >= 12 ? "PM" : "AM";
@@ -93,7 +50,68 @@ export default function HomeScreen() {
     // Handle the error
     console.error('Failed to save data to AsyncStorage:', error);
   }
-};
+ }
+  
+  const calculateFastingTime = (hours:number, minutes:number ) => {
+      let bloodDownPeriod = hours + 2;
+      let bloodNormalPeriod = hours + 8;
+      let fatBurningPeriod = hours + 10;
+      let ketosisPeriod = hours + 14;
+      let totalHours = hours + 16;
+      let totalMinutes = minutes;
+
+      // Adjust minutes if it exceeds 59
+      if (totalMinutes >= 60) {
+        totalHours += Math.floor(totalMinutes / 60);
+        totalMinutes = totalMinutes % 60;
+      }
+
+      // Adjust hours if it exceeds 23
+      if (totalHours >= 24) {
+        totalHours = totalHours % 24;
+      }
+      // Determine AM or PM suffix
+      let finalHour = formatHoursToAMnPM(totalHours);
+      // Update state with the result
+      setResultHours(finalHour);
+      setResultMinutes(totalMinutes.toString());
+      setStartTime(formatHoursToAMnPM(hours));
+      setbloodDownPeriod(formatHoursToAMnPM(bloodDownPeriod));
+      setbloodNormalPeriod(formatHoursToAMnPM(bloodNormalPeriod));
+      setfatBurningPeriod(formatHoursToAMnPM(fatBurningPeriod));
+      setketosisPeriod(formatHoursToAMnPM(ketosisPeriod));
+    }
+
+  console.log("Loading the app...");
+
+
+   // Use useEffect to load the value when the component mounts
+  useEffect(() => {
+    uploadFromLocalStorage();
+  }, []);
+  
+  const uploadFromLocalStorage = async () => {
+    console.log("Start getting shit from storae");
+    let h = await retrieveDataFromStorage("inputHours");
+    let m = await retrieveDataFromStorage("inputMinutes");
+    console.log("Time from storae", h, m)
+   setHours(h);
+    setMinutes(m);
+    let ih = parseInt(h) || 0;
+    let im = parseInt(m) || 0;
+    console.log("Time from storae", ih, im)
+    calculateFastingTime(ih,im); 
+  }
+  const handleAddTime = () => {
+    // Convert input to integers
+    let inputHours = parseInt(hours) || 0;
+    let inputMinutes = parseInt(minutes) || 0;
+    storeData("inputHours", inputHours);
+    storeData("inputMinutes",inputMinutes);
+    // Add  hours and calculate new time
+    calculateFastingTime(inputHours,inputMinutes);
+  };
+
 
   return (
     <ParallaxScrollView
@@ -269,8 +287,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   shadowProp: {
-    textShadowColor: "#6e7d6a",
+/*     textShadowColor: "#6e7d6a",
     shadowOpacity: 0.1,
-    textShadowRadius: 1,
+    textShadowRadius: 1, */
   },
 });
