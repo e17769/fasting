@@ -64,6 +64,6 @@ There are more futtures comming in the future
 Ahmed Gadir
 Follow me at:
 
-- [Github] (https://github.com/e17769/ )
+- [Github](https://github.com/e17769/)
 - [Linkedin](https://www.linkedin.com/in/ahmedgadir/)
 - [Personal Page](https://ahmedgadir.com/)
